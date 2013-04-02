@@ -1,0 +1,11 @@
+{
+    "name": "topojson-proxy",
+    "description": "Proxy for converting geographic JSON data services to TopoJSON",
+    "version": "0.5.0",
+    "author": "Ryan Clark",
+    "dependencies": {
+        "express": "3.1.0",
+        "topojson": "0.0.39",
+        "request": "2.16.6"
+    }
+}
