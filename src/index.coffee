@@ -7,11 +7,11 @@ app = express();
 
 app.use express.compress()
 
-app.get "/geoserver/:featuretype", (req, res) ->
+app.get "/geoserver/:state/:featuretype", (req, res) ->
   # default parameters
   defaults =
     host: "localhost:8080"
-    path: "geoserver/wfs"
+    path: "#{state}/wfs"
     version: "1.0.0"
     
   if req.query.maxfeatures?
@@ -24,9 +24,14 @@ app.get "/geoserver/:featuretype", (req, res) ->
   else
     convertToTopojson = false
     
-  url = "http://#{defaults.host}/#{defaults.path}?service=WFS&version=#{defaults.version}&request=GetFeature&outputformat=json&typename=#{req.params.featuretype}&maxfeatures=#{maxfeatures}"
+  url = "http://#{defaults.host}/#{defaults.path}?"
+  url += "service=WFS&version=#{defaults.version}"
+  url += "&request=GetFeature&outputformat=json"
+  url += "&typename=#{req.params.featuretype}"
+  url += "&maxfeatures=#{maxfeatures}"
+  
   request.get url, (error, response, body) ->
-    outputjson = JSON.parse body       
+    outputjson = JSON.parse body
     outputjson = toTopoJson(outputjson) if convertToTopojson     
     res.json outputjson
   

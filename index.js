@@ -16,11 +16,11 @@
 
   app.use(express.compress());
 
-  app.get("/geoserver/:featuretype", function(req, res) {
+  app.get("/geoserver/:state/:featuretype", function(req, res) {
     var convertToTopojson, defaults, maxfeatures, url;
     defaults = {
       host: "localhost:8080",
-      path: "geoserver/wfs",
+      path: "" + state + "/wfs",
       version: "1.0.0"
     };
     if (req.query.maxfeatures != null) {
@@ -33,7 +33,11 @@
     } else {
       convertToTopojson = false;
     }
-    url = "http://" + defaults.host + "/" + defaults.path + "?service=WFS&version=" + defaults.version + "&request=GetFeature&outputformat=json&typename=" + req.params.featuretype + "&maxfeatures=" + maxfeatures;
+    url = "http://" + defaults.host + "/" + defaults.path + "?";
+    url += "service=WFS&version=" + defaults.version;
+    url += "&request=GetFeature&outputformat=json";
+    url += "&typename=" + req.params.featuretype;
+    url += "&maxfeatures=" + maxfeatures;
     return request.get(url, function(error, response, body) {
       var outputjson;
       outputjson = JSON.parse(body);
