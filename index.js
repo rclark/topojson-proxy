@@ -38,6 +38,7 @@
     url += "&request=GetFeature&outputformat=json";
     url += "&typename=" + req.params.featuretype;
     url += "&maxfeatures=" + maxfeatures;
+    console.log("Attempting connection to:\n\t" + url);
     return request.get(url, function(error, response, body) {
       var outputjson;
       outputjson = JSON.parse(body);
@@ -72,6 +73,7 @@
     url += "&inSR=" + defaults.inSR;
     url += "&spatialRel=" + defaults.spatialRel;
     url += "&returnCountOnly=false&returnIdsOnly=false&returnGeometry=true&f=json";
+    console.log("Attempting connection to:\n\t" + url);
     return request.get(url, function(error, response, body) {
       var esrijson, outputjson;
       esrijson = JSON.parse(body);

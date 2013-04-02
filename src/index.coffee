@@ -30,6 +30,8 @@ app.get "/geoserver/:state/:featuretype", (req, res) ->
   url += "&typename=#{req.params.featuretype}"
   url += "&maxfeatures=#{maxfeatures}"
   
+  console.log "Attempting connection to:\n\t#{url}"
+  
   request.get url, (error, response, body) ->
     outputjson = JSON.parse body
     outputjson = toTopoJson(outputjson) if convertToTopojson     
@@ -59,6 +61,8 @@ app.get "/esri/:folder/:service/:layer", (req, res) ->
   url += "&inSR=#{defaults.inSR}"
   url += "&spatialRel=#{defaults.spatialRel}"
   url += "&returnCountOnly=false&returnIdsOnly=false&returnGeometry=true&f=json"
+  
+  console.log "Attempting connection to:\n\t#{url}"
   
   request.get url, (error, response, body) ->
     esrijson = JSON.parse body
