@@ -17,7 +17,7 @@ app.get "/geoserver/:state/:featuretype", (req, res) ->
   if req.query.maxfeatures?
     maxfeatures = req.query.maxfeatures
   else
-    maxfeatures = ""
+    maxfeatures = false
     
   if req.query.format? and req.query.format is "topojson"
     convertToTopojson = true
@@ -28,7 +28,7 @@ app.get "/geoserver/:state/:featuretype", (req, res) ->
   url += "service=WFS&version=#{defaults.version}"
   url += "&request=GetFeature&outputformat=json"
   url += "&typename=#{req.params.featuretype}"
-  url += "&maxfeatures=#{maxfeatures}"
+  url += "&maxfeatures=#{maxfeatures}" if maxfeatures?
   
   console.log "Attempting connection to:\n\t#{url}"
   

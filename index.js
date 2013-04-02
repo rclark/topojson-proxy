@@ -26,7 +26,7 @@
     if (req.query.maxfeatures != null) {
       maxfeatures = req.query.maxfeatures;
     } else {
-      maxfeatures = "";
+      maxfeatures = false;
     }
     if ((req.query.format != null) && req.query.format === "topojson") {
       convertToTopojson = true;
@@ -37,7 +37,9 @@
     url += "service=WFS&version=" + defaults.version;
     url += "&request=GetFeature&outputformat=json";
     url += "&typename=" + req.params.featuretype;
-    url += "&maxfeatures=" + maxfeatures;
+    if (maxfeatures != null) {
+      url += "&maxfeatures=" + maxfeatures;
+    }
     console.log("Attempting connection to:\n\t" + url);
     return request.get(url, function(error, response, body) {
       var outputjson;
