@@ -20,7 +20,7 @@
     var convertToTopojson, defaults, maxfeatures, url;
     defaults = {
       host: "localhost:8080",
-      path: "" + state + "/wfs",
+      path: "" + req.params.state + "/wfs",
       version: "1.0.0"
     };
     if (req.query.maxfeatures != null) {
