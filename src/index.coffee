@@ -14,10 +14,7 @@ app.get "/geoserver/:state/:featuretype", (req, res) ->
     path: "#{req.params.state}/wfs"
     version: "1.0.0"
     
-  if req.query.maxfeatures?
-    maxfeatures = req.query.maxfeatures
-  else
-    maxfeatures = false
+  maxfeatures = req.query.maxfeatures if req.query.maxfeatures?    
     
   if req.query.format? and req.query.format is "topojson"
     convertToTopojson = true

@@ -25,8 +25,6 @@
     };
     if (req.query.maxfeatures != null) {
       maxfeatures = req.query.maxfeatures;
-    } else {
-      maxfeatures = false;
     }
     if ((req.query.format != null) && req.query.format === "topojson") {
       convertToTopojson = true;
