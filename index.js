@@ -70,7 +70,11 @@
       inSR: "4326",
       spatialRel: "esriSpatialRelIntersects"
     };
-    url = "http://" + defaults.host + "/" + defaults.path + "/" + req.params.folder + "/" + req.params.service + "/MapServer/" + req.params.layer + "/query?";
+    url = "http://" + defaults.host + "/" + defaults.path + "/";
+    if (req.params.folder === !"none") {
+      url += "" + req.params.folder;
+    }
+    url += "/" + req.params.service + "/MapServer/" + req.params.layer + "/query?";
     url += "geometry=" + req.query.bbox;
     url += "&geometryType=" + defaults.geometryType;
     url += "&inSR=" + defaults.inSR;

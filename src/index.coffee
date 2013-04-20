@@ -53,7 +53,9 @@ app.get "/esri/:folder/:service/:layer", (req, res) ->
     inSR: "4326"
     spatialRel: "esriSpatialRelIntersects"
     
-  url = "http://#{defaults.host}/#{defaults.path}/#{req.params.folder}/#{req.params.service}/MapServer/#{req.params.layer}/query?"
+  url = "http://#{defaults.host}/#{defaults.path}/"
+  url += "#{req.params.folder}" if req.params.folder is not "none"
+  url += "/#{req.params.service}/MapServer/#{req.params.layer}/query?"
   url += "geometry=#{req.query.bbox}"
   url += "&geometryType=#{defaults.geometryType}"
   url += "&inSR=#{defaults.inSR}"
