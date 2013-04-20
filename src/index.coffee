@@ -73,7 +73,9 @@ toTopoJson = (geojson) ->
     "coordinate-system": "auto"
     quantization: 1e4
     "stich-poles": true
-    "property-transform": () ->
+    "property-transform": (o,k,v) ->
+      o[k] = v
+      return true
   topojson.topology geojson.features, options
     
 app.listen 3000
