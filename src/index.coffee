@@ -26,6 +26,7 @@ app.get "/geoserver/:state/:featuretype", (req, res) ->
   url += "&request=GetFeature&outputformat=json"
   url += "&typename=#{req.params.featuretype}"
   url += "&maxfeatures=#{maxfeatures}" if maxfeatures?
+  url += "&bbox=#{req.query.bbox}" if req.query.bbox?
   
   console.log "Attempting connection to:\n\t#{url}"
   

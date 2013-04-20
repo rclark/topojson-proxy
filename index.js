@@ -38,6 +38,9 @@
     if (maxfeatures != null) {
       url += "&maxfeatures=" + maxfeatures;
     }
+    if (req.query.bbox != null) {
+      url += "&bbox=" + req.query.bbox;
+    }
     console.log("Attempting connection to:\n\t" + url);
     return request.get(url, function(error, response, body) {
       var outputjson;
