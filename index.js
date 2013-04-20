@@ -92,7 +92,7 @@
       "coordinate-system": "auto",
       quantization: 1e4,
       "stich-poles": true,
-      "property-transform": function() {}
+      "property-transform": function(o,k,v) {o[k]=v; return true;}
     };
     return topojson.topology(geojson.features, options);
   };
