@@ -86,15 +86,21 @@
   });
 
   toTopoJson = function(geojson) {
-    var options;
+    var objects, options;
     options = {
       verbose: true,
       "coordinate-system": "auto",
       quantization: 1e4,
       "stich-poles": true,
-      "property-transform": function(o,k,v) {o[k]=v; return true;}
+      "property-transform": function(o, k, v) {
+        o[k] = v;
+        return true;
+      }
     };
-    return topojson.topology(geojson.features, options);
+    objects = {
+      features: geojson
+    };
+    return topojson.topology(objects, options);
   };
 
   app.listen(3000);

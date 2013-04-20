@@ -76,6 +76,8 @@ toTopoJson = (geojson) ->
     "property-transform": (o,k,v) ->
       o[k] = v
       return true
-  topojson.topology geojson.features, options
+  objects =
+    features: geojson
+  topojson.topology objects, options
     
 app.listen 3000
